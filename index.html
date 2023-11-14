@@ -11,14 +11,25 @@
       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Proza+Libre&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // eslint-disable-next-line no-unused-vars
+      function imgError(source) {
+        source.src = 'images/placeholder-image-square.jpg';
+        source.oneerror = '';
+        return true;
+      }
+    </script>
   </head>
   <body>
     <header>
@@ -29,37 +40,41 @@
       </div>
     </header>
     <main class="container">
-      <form data-view="entry-form">
-        <div class="row">
-          <h2 class="column-full">New Entry</h2>
-          <div class="column-half">
-            <img src="images/placeholder-image-square.jpg" />
-          </div>
-
-          <div class="column-half entry-form-items">
-            <div>
-              <label for="title">Title</label>
-              <input required type="text" name="title" id="title" />
+      <div data-view="entry-form-body">
+        <form id="entry-form">
+          <div class="row">
+            <h2 class="column-full">New Entry</h2>
+            <div class="column-half">
+              <img
+                onerror="imgError(this)"
+                src="images/placeholder-image-square.jpg" />
             </div>
 
-            <div>
-              <label for="photo-url">Photo URL</label>
-              <input required type="text" name="photo-url" id="photo-url" />
-            </div>
-          </div>
-          <div class="column-full entry-form-items">
-            <div>
-              <label id="notes-label" for="notes">Notes</label>
-              <textarea required id="notes" name="notes"></textarea>
-            </div>
-            <div>
+            <div class="column-half entry-form-items">
               <div>
-                <button type="submit" name="submit">SAVE</button>
+                <label for="title">Title</label>
+                <input required type="text" name="title" id="title" />
+              </div>
+
+              <div>
+                <label for="photo-url">Photo URL</label>
+                <input required type="text" name="photo-url" id="photo-url" />
+              </div>
+            </div>
+            <div class="column-full entry-form-items">
+              <div id="notes-div">
+                <label id="notes-label" for="notes">Notes</label>
+                <textarea required id="notes" name="notes"></textarea>
+              </div>
+              <div>
+                <div>
+                  <button type="submit" name="submit">SAVE</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>

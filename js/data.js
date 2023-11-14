@@ -13,9 +13,7 @@ let data = {
 };
 
 $form.addEventListener('submit', function (event) {
-  console.log($notes.value);
   event.preventDefault();
-  console.log($img);
   const newObj = {
     entryId: data.nextEntryId,
     title: $title.value,
@@ -31,9 +29,7 @@ $form.addEventListener('submit', function (event) {
 
 window.addEventListener('beforeunload', function (event) {
   localStorage.setItem('first-code-journal', JSON.stringify(data));
-  // event.preventDefault()
 });
 
 const oldData = localStorage.getItem('first-code-journal');
 if (oldData !== null) data = JSON.parse(oldData);
-console.log(data);
