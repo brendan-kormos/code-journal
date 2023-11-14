@@ -11,16 +11,55 @@
       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <header>
-      <div class="container"></div>
+      <div class="container">
+        <div class="row">
+          <h1 class="column-full">Code Journal</h1>
+        </div>
+      </div>
     </header>
     <main class="container">
-      <div data-view="entry-form"></div>
+      <form data-view="entry-form">
+        <div class="row">
+          <h2 class="column-full">New Entry</h2>
+          <div class="column-half">
+            <img src="images/placeholder-image-square.jpg" />
+          </div>
+
+          <div class="column-half entry-form-items">
+            <div>
+              <label for="title">Title</label>
+              <input required type="text" name="title" id="title" />
+            </div>
+
+            <div>
+              <label for="photo-url">Photo URL</label>
+              <input required type="text" name="photo-url" id="photo-url" />
+            </div>
+          </div>
+          <div class="column-full entry-form-items">
+            <div>
+              <label id="notes-label" for="notes">Notes</label>
+              <textarea required id="notes" name="notes"></textarea>
+            </div>
+            <div>
+              <div>
+                <button type="submit" name="submit">SAVE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
