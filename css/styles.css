@@ -59,3 +59,31 @@ button {
   height: 32px;
   left: calc(100% - 72px);
 }
+
+li {
+  list-style-type: none;
+}
+
+p {
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 25.6px */
+}
+
+h3 {
+  /* margin-top: 1.625rem; */
+
+  /* padding-top: 26px; */
+}
+
+.entry-image {
+  border-radius: 4px;
+  padding-bottom: 26px;
+}
+
+/* #entries-div > div {
+
+} */
