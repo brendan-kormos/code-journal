@@ -29,5 +29,6 @@ $form.addEventListener('submit', function (event) {
 });
 
 window.addEventListener('beforeunload', function (event) {
+  localStorage.setItem('first-code-journal', JSON.stringify(data));
   // event.preventDefault()
 });
