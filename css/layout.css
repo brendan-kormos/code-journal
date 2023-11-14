@@ -18,7 +18,29 @@
   width: 100%;
 }
 
+img {
+  width: 100%;
+}
+
+.entry-form-items > div {
+  margin-bottom: 2em;
+}
+
+.entry-form-items > div > * {
+  width: 100%;
+}
+
+#notes-div {
+  margin-top: 0;
+}
+
 @media screen and (min-width: 768px) {
+  /* pc */
+
+  #notes-div {
+    margin-top: 2em;
+  }
+
   .container {
     max-width: 900px;
   }

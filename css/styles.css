@@ -1,0 +1,61 @@
+/* stylelint-disable string-quotes */
+body {
+  background-color: #f0f0f0;
+  font-family: 'Proza Libre', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+header {
+  background-color: #562b81;
+  border: solid #562b81;
+  color: white;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+input[type='text'],
+textarea {
+  border-radius: 4px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  border-width: 1px;
+  padding: 5px;
+  border-color: #b6b6b6;
+}
+
+textarea {
+  height: 149px;
+}
+
+input[type='text']:focus,
+textarea:focus {
+  outline: 1px solid #562b81;
+  border-width: 1px;
+  border-color: #562b81;
+}
+
+label {
+  height: 16px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #562b81;
+  color: white;
+  position: relative;
+  width: 72px;
+  height: 32px;
+  left: calc(100% - 72px);
+}
