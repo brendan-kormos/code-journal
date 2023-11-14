@@ -1,7 +1,6 @@
 const $photoUrl = document.querySelector('#photo-url');
-const $submit = document.querySelector('button');
 
-// const tempIMG = $img.src
+//
 
 $photoUrl.addEventListener('input', function (event) {
   const url = event.target.value;
@@ -9,5 +8,3 @@ $photoUrl.addEventListener('input', function (event) {
   $img.src = url;
   console.log('URL', url);
 });
-
-console.log($submit);
