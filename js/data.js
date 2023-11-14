@@ -21,7 +21,8 @@ $form.addEventListener('submit', function (event) {
     img: $img.src,
   };
   data.nextEntryId++;
-  console.log(newObj);
+  data.entries.unshift(newObj);
+  console.log(data.entries);
 });
 
 window.addEventListener('beforeunload', function (event) {
