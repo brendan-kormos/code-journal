@@ -100,10 +100,12 @@ p {
   padding-right: 10px;
 }
 
-.top-row {
+.top-column {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  /* padding: 0 0.75rem; */
 }
 
 #entry-form-link {
@@ -126,4 +128,19 @@ p {
 #entry-form-link:hover,
 button:hover {
   cursor: pointer;
+}
+
+.entry-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fa-pencil {
+  scale: 1.25;
+  padding: 0 0.75rem;
+}
+
+h3 {
+  margin: 0;
 }
