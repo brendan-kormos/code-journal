@@ -81,10 +81,16 @@ function entryFormClicked(event) {
   viewSnap('entry-form');
 }
 
+function entriesUnorderedListClicked(event) {
+  console.log('clicked event', event.target.className);
+  const $target = event.target;
+  // const className = $target.className
+  if ($target.matches('.fa-pencil')) console.log('pencil clicked');
+}
+
 for (const key in views$) {
   views$[key].classList.add('hidden');
 }
-
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     const $entry = renderEntry(data.entries[i]);
@@ -96,4 +102,5 @@ document.addEventListener('DOMContentLoaded', function (event) {
   viewSnap(data.view);
   $entriesLink.addEventListener('click', entriesClicked);
   $entryFormLink.addEventListener('click', entryFormClicked);
+  $entriesUnorderedList.addEventListener('click', entriesUnorderedListClicked);
 });
