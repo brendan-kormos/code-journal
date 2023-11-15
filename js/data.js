@@ -85,7 +85,15 @@ function entriesUnorderedListClicked(event) {
   console.log('clicked event', event.target.className);
   const $target = event.target;
   // const className = $target.className
-  if ($target.matches('.fa-pencil')) console.log('pencil clicked');
+  if ($target.matches('.fa-pencil')) {
+    console.log('pencil clicked');
+    const $li = $target.closest('li');
+    const id = $li.getAttribute('data-entry-id');
+    const entry = data.entries[id - 1];
+    console.log('found data entry', entry);
+    // const entry = data.entries[]
+    viewSnap('entry-form');
+  }
 }
 
 for (const key in views$) {
