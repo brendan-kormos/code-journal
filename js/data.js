@@ -9,6 +9,7 @@ const $entriesUnorderedList = document.querySelector('#entries-unordered-list');
 const $noEntriesAlert = document.querySelector('#no-entries-alert');
 const $entriesLink = document.querySelector('#entries-link');
 const $entryFormLink = document.querySelector('#entry-form-link');
+const $photoUrl = document.querySelector('#photo-url');
 
 const views$ = {
   entries: document.querySelector('[data-view=entries]'),
@@ -91,7 +92,12 @@ function entriesUnorderedListClicked(event) {
     const id = $li.getAttribute('data-entry-id');
     const entry = data.entries[id - 1];
     console.log('found data entry', entry);
-    // const entry = data.entries[]
+
+    $title.value = entry.title;
+    $photoUrl.value = entry.img;
+    $notes.textContent = entry.notes;
+    $img.src = entry.img;
+
     viewSnap('entry-form');
   }
 }
