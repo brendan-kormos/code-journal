@@ -35,8 +35,10 @@
     <header>
       <div class="container">
         <div class="row">
-          <h1 class="column-full">Code Journal</h1>
-          <a>Entries</a>
+          <div class="nav-bar">
+            <h1 id="code-journal-h1" class="column-full">Code Journal</h1>
+            <a id="entries-link">Entries</a>
+          </div>
         </div>
       </div>
     </header>
@@ -77,11 +79,14 @@
         </form>
       </div>
       <div data-view="entries">
+        <div class="top-row">
+          <h2>Entries</h2>
+          <a id="entry-form-link">New</a>
+        </div>
+
         <p id="no-entries-alert">No entries have been recorded.</p>
-        <ul id="entries-unordered-list" class="hidden">
+        <ul id="entries-unordered-list">
           <li class="row list-item-entry hidden">
-            <!-- <div id="entries-div">
-              <div class="row"> -->
             <div class="column-half">
               <img
                 class="entry-image"
@@ -94,8 +99,6 @@
                 with no goal
               </p>
             </div>
-            <!-- </div>
-            </div> -->
           </li>
         </ul>
       </div>
