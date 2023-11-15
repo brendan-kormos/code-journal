@@ -34,6 +34,19 @@ img {
   margin-top: 0;
 }
 
+h3 {
+  margin: auto;
+}
+
+ul {
+  padding: 0;
+}
+
+/* #entries-div > div {
+  margin-top: auto;
+  margin-bottom: 1.625;
+} */
+
 @media screen and (min-width: 768px) {
   /* pc */
 
@@ -53,4 +66,9 @@ img {
   .column-half {
     width: 50%;
   }
+
+  /* #entries-div > div {
+    margin-top: 1.687rem;
+    margin-bottom: 3.43rem;
+  } */
 }
