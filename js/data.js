@@ -28,6 +28,7 @@ function renderEntry(entry) {
   $entry.querySelector('h3').textContent = entry.title;
   $entry.querySelector('p').textContent = entry.notes;
   $entry.classList.remove('hidden');
+  $entry.setAttribute('data-entry-id', entry.entryId);
   return $entry;
 }
 
