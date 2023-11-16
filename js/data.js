@@ -10,6 +10,7 @@ const $noEntriesAlert = document.querySelector('#no-entries-alert');
 const $entriesLink = document.querySelector('#entries-link');
 const $entryFormLink = document.querySelector('#entry-form-link');
 const $photoUrl = document.querySelector('#photo-url');
+const $entryFormTitle = document.querySelector('#entry-form-title');
 
 const views$ = {
   entries: document.querySelector('[data-view=entries]'),
@@ -97,7 +98,7 @@ function entriesUnorderedListClicked(event) {
     $photoUrl.value = entry.img;
     $notes.textContent = entry.notes;
     $img.src = entry.img;
-
+    $entryFormTitle.textContent = 'Edit Entry';
     viewSnap('entry-form');
   }
 }
