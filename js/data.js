@@ -100,7 +100,6 @@ function entryFormClicked(event) {
 
 function entriesUnorderedListClicked(event) {
   const $target = event.target;
-  // const className = $target.className
   if ($target.matches('.fa-pencil')) {
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
@@ -117,6 +116,7 @@ function entriesUnorderedListClicked(event) {
   }
 }
 
+// reset views prior to setting
 for (const key in views$) {
   views$[key].classList.add('hidden');
 }
@@ -126,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $entriesUnorderedList.prepend($entry);
   }
   if (data.entries.length > 0) toggleNoEntries();
-  // reset views prior to setting
 
   viewSnap(data.view);
   $entriesLink.addEventListener('click', entriesClicked);
