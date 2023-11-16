@@ -11,6 +11,9 @@ const $entriesLink = document.querySelector('#entries-link');
 const $entryFormLink = document.querySelector('#entry-form-link');
 const $photoUrl = document.querySelector('#photo-url');
 const $entryFormTitle = document.querySelector('#entry-form-title');
+const $deleteEntry = document.querySelector(
+  '#entry-form-save-delete-column>button.delete-button'
+);
 
 const views$ = {
   entries: document.querySelector('[data-view=entries]'),
@@ -73,6 +76,7 @@ $form.addEventListener('submit', function (event) {
     const $entry = renderEntry(newObj);
     $entriesUnorderedList.prepend($entry);
   } else {
+    $deleteEntry.classList.add('hidden');
     newObj.entryId = data.editing.entryId;
     data.entries[newObj.entryId - 1] = newObj;
     const $replacementElement = renderEntry(newObj);
@@ -84,6 +88,7 @@ $form.addEventListener('submit', function (event) {
     $entryFormTitle.textContent = 'New Entry';
     data.editing = null;
   }
+
   $notes.value = '';
   $form.reset();
   viewSnap('entries');
@@ -111,7 +116,7 @@ function entriesUnorderedListClicked(event) {
     $img.src = entry.img;
     $entryFormTitle.textContent = 'Edit Entry';
     data.editing = entry;
-
+    $deleteEntry.classList.remove('hidden');
     viewSnap('entry-form');
   }
 }
