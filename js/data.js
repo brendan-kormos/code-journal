@@ -14,6 +14,14 @@ const $entryFormTitle = document.querySelector('#entry-form-title');
 const $deleteEntry = document.querySelector(
   '#entry-form-save-delete-column>button.delete-button'
 );
+const $modalMain = document.querySelector('#modal-main');
+
+const $confirmDeleteMenu = document.querySelector('.confirm-delete');
+const $confirmDeleteButton =
+  $confirmDeleteMenu.querySelector('[name="confirm"]');
+const $cancelDeleteButton = $confirmDeleteMenu.querySelector('[name="cancel"]');
+console.log($confirmDeleteButton);
+console.log($cancelDeleteButton);
 
 const views$ = {
   entries: document.querySelector('[data-view=entries]'),
@@ -60,7 +68,6 @@ function toggleNoEntries() {
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
-
   const newObj = {
     entryId: data.nextEntryId,
     title: $title.value,
@@ -95,6 +102,10 @@ $form.addEventListener('submit', function (event) {
   if (noEntries) toggleNoEntries();
 });
 
+$form.addEventListener('button', function (event) {
+  console.log(event);
+});
+
 function entriesClicked(event) {
   viewSnap('entries');
 }
@@ -103,22 +114,39 @@ function entryFormClicked(event) {
   viewSnap('entry-form');
 }
 
+function setEntryFormEdit(entry) {
+  $title.value = entry.title;
+  $photoUrl.value = entry.img;
+  $notes.textContent = entry.notes;
+  $img.src = entry.img;
+  $entryFormTitle.textContent = 'Edit Entry';
+  data.editing = entry;
+  $deleteEntry.classList.remove('hidden');
+}
+
 function entriesUnorderedListClicked(event) {
   const $target = event.target;
   if ($target.matches('.fa-pencil')) {
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
     const entry = data.entries[id - 1];
+    console.log(entry);
+    setEntryFormEdit(entry);
 
-    $title.value = entry.title;
-    $photoUrl.value = entry.img;
-    $notes.textContent = entry.notes;
-    $img.src = entry.img;
-    $entryFormTitle.textContent = 'Edit Entry';
-    data.editing = entry;
-    $deleteEntry.classList.remove('hidden');
     viewSnap('entry-form');
   }
+}
+
+function deleteEntryClicked(event) {
+  $modalMain.classList.remove('hidden');
+}
+function modalMainClicked(event) {
+  console.log('event', event.target);
+  const $target = event.target;
+  if ($target.getAttribute('name') === 'confirm') {
+    // go ahead and delete
+  } else if ($target.getAttribute('name') === 'confirm')
+    $modalMain.classList.add('hidden');
 }
 
 // reset views prior to setting
@@ -132,8 +160,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
   if (data.entries.length > 0) toggleNoEntries();
 
+  setEntryFormEdit(data.editing);
   viewSnap(data.view);
   $entriesLink.addEventListener('click', entriesClicked);
   $entryFormLink.addEventListener('click', entryFormClicked);
   $entriesUnorderedList.addEventListener('click', entriesUnorderedListClicked);
+  $deleteEntry.addEventListener('click', deleteEntryClicked);
+  $modalMain.addEventListener('click', modalMainClicked);
 });

@@ -75,7 +75,7 @@
                 <div id="entry-form-save-delete-column">
                   <button
                     class="delete-button hidden"
-                    type="submit"
+                    type="button"
                     name="delete">
                     Delete Entry
                   </button>
@@ -117,14 +117,14 @@
         </ul>
       </div>
     </main>
-    <div id="modal-main">
-      <form class="confirm-delete">
+    <div id="modal-main" class="hidden">
+      <div class="confirm-delete">
         <h3>Are you sure you want to delete this entry?</h3>
         <div class="confirm-delete-buttons">
-          <button type="submit" name="cancel">Cancel</button>
-          <button type="submit" name="confirm">Confirm</button>
+          <button type="button" name="cancel">Cancel</button>
+          <button type="button" name="confirm">Confirm</button>
         </div>
-      </form>
+      </div>
     </div>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
