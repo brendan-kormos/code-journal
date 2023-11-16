@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* exported data */
+
 const $form = document.querySelector('form');
 const $title = document.querySelector('#title');
 const $img = document.querySelector('img');
@@ -20,8 +22,6 @@ const $confirmDeleteMenu = document.querySelector('.confirm-delete');
 const $confirmDeleteButton =
   $confirmDeleteMenu.querySelector('[name="confirm"]');
 const $cancelDeleteButton = $confirmDeleteMenu.querySelector('[name="cancel"]');
-console.log($confirmDeleteButton);
-console.log($cancelDeleteButton);
 
 const views$ = {
   entries: document.querySelector('[data-view=entries]'),
@@ -130,7 +130,6 @@ function entriesUnorderedListClicked(event) {
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
     const entry = data.entries[id - 1];
-    console.log(entry);
     setEntryFormEdit(entry);
 
     viewSnap('entry-form');
@@ -141,11 +140,15 @@ function deleteEntryClicked(event) {
   $modalMain.classList.remove('hidden');
 }
 function modalMainClicked(event) {
-  console.log('event', event.target);
   const $target = event.target;
   if ($target.getAttribute('name') === 'confirm') {
     // go ahead and delete
-  } else if ($target.getAttribute('name') === 'confirm')
+
+    $modalMain.classList.add('hidden');
+  } else if ($target.getAttribute('name') === 'cancel')
+    // close menu if clicked outside or cancel
+    $modalMain.classList.add('hidden');
+  else if ($target.getAttribute('id') === 'modal-main')
     $modalMain.classList.add('hidden');
 }
 
