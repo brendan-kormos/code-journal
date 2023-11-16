@@ -1,4 +1,4 @@
-const $photoUrl = document.querySelector('#photo-url');
+/* eslint-disable no-undef */
 
 $photoUrl.addEventListener('input', function (event) {
   const url = event.target.value;

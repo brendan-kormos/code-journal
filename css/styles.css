@@ -100,7 +100,7 @@ p {
   padding-right: 10px;
 }
 
-.top-row {
+.top-column {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -122,8 +122,24 @@ p {
   font-weight: 600;
 }
 
+.entry-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fa-pencil {
+  scale: 1.25;
+  padding: 0 0.75rem;
+}
+
+h3 {
+  margin: 0;
+}
+
 #entries-link:hover,
 #entry-form-link:hover,
-button:hover {
+button:hover,
+.fa-pencil:hover {
   cursor: pointer;
 }
