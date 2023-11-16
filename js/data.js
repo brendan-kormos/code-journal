@@ -36,6 +36,7 @@ let data = {
 };
 
 function renderEntry(entry) {
+  console.log(entry);
   const $entry = $templateEntry.cloneNode(true);
   $entry.querySelector('.entry-image').src = entry.img;
   $entry.querySelector('h3').textContent = entry.title;
@@ -75,17 +76,17 @@ $form.addEventListener('submit', function (event) {
     notes: $notes.value,
   };
   if (data.editing === null) {
-    data.nextEntryId++;
-    data.entries.push(newObj);
+    data.entries[data.nextEntryId] = newObj;
 
     $img.src = tempIMG;
 
     const $entry = renderEntry(newObj);
     $entriesUnorderedList.prepend($entry);
+    data.nextEntryId++;
   } else {
     $deleteEntry.classList.add('hidden');
     newObj.entryId = data.editing.entryId;
-    data.entries[newObj.entryId - 1] = newObj;
+    data.entries[newObj.entryId] = newObj;
     const $replacementElement = renderEntry(newObj);
     $entriesUnorderedList
       .querySelector('li[data-entry-id="' + newObj.entryId + '"]')
@@ -93,9 +94,8 @@ $form.addEventListener('submit', function (event) {
 
     $img.src = tempIMG;
     $entryFormTitle.textContent = 'New Entry';
-    data.editing = null;
   }
-
+  data.editing = null;
   $notes.value = '';
   $form.reset();
   viewSnap('entries');
@@ -110,7 +110,11 @@ function entriesClicked(event) {
   viewSnap('entries');
 }
 
-function entryFormClicked(event) {
+function newEntryClicked(event) {
+  $form.reset();
+  $notes.value = '';
+  data.editing = null;
+  $entryFormTitle.textContent = 'New Entry';
   viewSnap('entry-form');
 }
 
@@ -129,7 +133,7 @@ function entriesUnorderedListClicked(event) {
   if ($target.matches('.fa-pencil')) {
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
-    const entry = data.entries[id - 1];
+    const entry = data.entries[id];
     setEntryFormEdit(entry);
 
     viewSnap('entry-form');
@@ -143,7 +147,7 @@ function modalMainClicked(event) {
   const $target = event.target;
   if ($target.getAttribute('name') === 'confirm') {
     // go ahead and delete
-
+    delete data.entries[data.editing.entryId];
     $modalMain.classList.add('hidden');
   } else if ($target.getAttribute('name') === 'cancel')
     // close menu if clicked outside or cancel
@@ -157,16 +161,15 @@ for (const key in views$) {
   views$[key].classList.add('hidden');
 }
 document.addEventListener('DOMContentLoaded', function (event) {
-  for (let i = 0; i < data.entries.length; i++) {
+  for (let i = 1; i < data.entries.length - 1; i++) {
     const $entry = renderEntry(data.entries[i]);
     $entriesUnorderedList.prepend($entry);
   }
   if (data.entries.length > 0) toggleNoEntries();
-
-  setEntryFormEdit(data.editing);
+  if (data.editing !== null) setEntryFormEdit(data.editing);
   viewSnap(data.view);
   $entriesLink.addEventListener('click', entriesClicked);
-  $entryFormLink.addEventListener('click', entryFormClicked);
+  $entryFormLink.addEventListener('click', newEntryClicked);
   $entriesUnorderedList.addEventListener('click', entriesUnorderedListClicked);
   $deleteEntry.addEventListener('click', deleteEntryClicked);
   $modalMain.addEventListener('click', modalMainClicked);
