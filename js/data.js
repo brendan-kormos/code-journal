@@ -41,8 +41,8 @@ function renderEntry(entry) {
   $entry.querySelector('.entry-image').src = entry.img;
   $entry.querySelector('h3').textContent = entry.title;
   $entry.querySelector('p').textContent = entry.notes;
-  $entry.classList.remove('hidden');
   $entry.setAttribute('data-entry-id', entry.entryId);
+  $entry.classList.remove('hidden');
   return $entry;
 }
 
@@ -68,16 +68,17 @@ function toggleNoEntries() {
 }
 
 $form.addEventListener('submit', function (event) {
+  console.log('form submit');
   event.preventDefault();
   const newObj = {
     entryId: data.nextEntryId,
     title: $title.value,
-    img: $img.src,
+    img: $photoUrl.value,
     notes: $notes.value,
   };
   if (data.editing === null) {
+    // create a new entry
     data.entries[data.nextEntryId] = newObj;
-
     $img.src = tempIMG;
 
     const $entry = renderEntry(newObj);
@@ -94,10 +95,11 @@ $form.addEventListener('submit', function (event) {
 
     $img.src = tempIMG;
     $entryFormTitle.textContent = 'New Entry';
+    data.editing = null;
   }
-  data.editing = null;
-  $notes.value = '';
   $form.reset();
+  console.log('value');
+  // $notes.value = '';
   viewSnap('entries');
   if (noEntries) toggleNoEntries();
 });
@@ -110,15 +112,19 @@ function entriesClicked(event) {
   viewSnap('entries');
 }
 
-function newEntryClicked(event) {
-  $form.reset();
-  $notes.value = '';
-  data.editing = null;
-  $entryFormTitle.textContent = 'New Entry';
+function entryFormLinkClicked(event) {
+  console.log('entryForm Clicked');
+
+  // $form.reset();
+  // $notes.value = '';
+  // data.editing = null;
+  // $entryFormTitle.textContent = 'New Entry';
+
   viewSnap('entry-form');
 }
 
 function setEntryFormEdit(entry) {
+  console.log('setEntryFormEdit Clicked');
   $title.value = entry.title;
   $photoUrl.value = entry.img;
   $notes.textContent = entry.notes;
@@ -133,7 +139,9 @@ function entriesUnorderedListClicked(event) {
   if ($target.matches('.fa-pencil')) {
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
+
     const entry = data.entries[id];
+    console.log(entry);
     setEntryFormEdit(entry);
 
     viewSnap('entry-form');
@@ -161,16 +169,17 @@ for (const key in views$) {
   views$[key].classList.add('hidden');
 }
 document.addEventListener('DOMContentLoaded', function (event) {
-  for (let i = 1; i < data.entries.length - 1; i++) {
+  for (let i = 1; i < data.entries.length; i++) {
     const $entry = renderEntry(data.entries[i]);
     $entriesUnorderedList.prepend($entry);
   }
   if (data.entries.length > 0) toggleNoEntries();
   if (data.editing !== null) setEntryFormEdit(data.editing);
   viewSnap(data.view);
-  $entriesLink.addEventListener('click', entriesClicked);
-  $entryFormLink.addEventListener('click', newEntryClicked);
-  $entriesUnorderedList.addEventListener('click', entriesUnorderedListClicked);
-  $deleteEntry.addEventListener('click', deleteEntryClicked);
-  $modalMain.addEventListener('click', modalMainClicked);
 });
+
+$entriesLink.addEventListener('click', entriesClicked);
+$entryFormLink.addEventListener('click', entryFormLinkClicked);
+$entriesUnorderedList.addEventListener('click', entriesUnorderedListClicked);
+$deleteEntry.addEventListener('click', deleteEntryClicked);
+$modalMain.addEventListener('click', modalMainClicked);
