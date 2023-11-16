@@ -73,7 +73,7 @@ $form.addEventListener('submit', function (event) {
     const $entry = renderEntry(newObj);
     $entriesUnorderedList.prepend($entry);
   } else {
-    newObj.entryId = data.editing;
+    newObj.entryId = data.editing.entryId;
     data.entries[newObj.entryId - 1] = newObj;
     const $replacementElement = renderEntry(newObj);
     $entriesUnorderedList
@@ -110,7 +110,7 @@ function entriesUnorderedListClicked(event) {
     $notes.textContent = entry.notes;
     $img.src = entry.img;
     $entryFormTitle.textContent = 'Edit Entry';
-    data.editing = id;
+    data.editing = entry;
 
     viewSnap('entry-form');
   }
