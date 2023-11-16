@@ -52,15 +52,30 @@ label {
   margin-bottom: 15px;
 }
 
-button {
+.save-button {
   border-width: 0;
   border-radius: 4px;
   background-color: #562b81;
   color: white;
-  position: relative;
   width: 72px;
   height: 32px;
-  left: calc(100% - 72px);
+  margin-left: auto;
+}
+
+.delete-button {
+  color: #dc2626;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  border: 0;
+}
+
+#entry-form-save-delete-column {
+  display: flex;
+  justify-content: space-between;
 }
 
 .list-item-entry {
