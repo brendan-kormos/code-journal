@@ -122,12 +122,6 @@ p {
   font-weight: 600;
 }
 
-#entries-link:hover,
-#entry-form-link:hover,
-button:hover {
-  cursor: pointer;
-}
-
 .entry-title-bar {
   display: flex;
   align-items: center;
@@ -141,4 +135,11 @@ button:hover {
 
 h3 {
   margin: 0;
+}
+
+#entries-link:hover,
+#entry-form-link:hover,
+button:hover,
+.fa-pencil:hover {
+  cursor: pointer;
 }
