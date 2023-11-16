@@ -57,20 +57,35 @@ function toggleNoEntries() {
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
+
   const newObj = {
     entryId: data.nextEntryId,
     title: $title.value,
     img: $img.src,
     notes: $notes.value,
   };
-  data.nextEntryId++;
-  data.entries.push(newObj);
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.push(newObj);
 
-  $img.src = tempIMG;
+    $img.src = tempIMG;
+
+    const $entry = renderEntry(newObj);
+    $entriesUnorderedList.prepend($entry);
+  } else {
+    newObj.entryId = data.editing;
+    data.entries[newObj.entryId - 1] = newObj;
+    const $replacementElement = renderEntry(newObj);
+    $entriesUnorderedList
+      .querySelector('li[data-entry-id="' + newObj.entryId + '"]')
+      .replaceWith($replacementElement);
+
+    $img.src = tempIMG;
+    $entryFormTitle.textContent = 'New Entry';
+    data.editing = null;
+  }
+  $notes.value = '';
   $form.reset();
-
-  const $entry = renderEntry(newObj);
-  $entriesUnorderedList.prepend($entry);
   viewSnap('entries');
   if (noEntries) toggleNoEntries();
 });
@@ -84,21 +99,20 @@ function entryFormClicked(event) {
 }
 
 function entriesUnorderedListClicked(event) {
-  console.log('clicked event', event.target.className);
   const $target = event.target;
   // const className = $target.className
   if ($target.matches('.fa-pencil')) {
-    console.log('pencil clicked');
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
     const entry = data.entries[id - 1];
-    console.log('found data entry', entry);
 
     $title.value = entry.title;
     $photoUrl.value = entry.img;
     $notes.textContent = entry.notes;
     $img.src = entry.img;
     $entryFormTitle.textContent = 'Edit Entry';
+    data.editing = id;
+
     viewSnap('entry-form');
   }
 }
