@@ -152,6 +152,74 @@ h3 {
   margin: 0;
 }
 
+#modal-main {
+  position: fixed;
+  top: 0;
+  background-color: rgba(41, 41, 41, 0.75);
+  width: 100%;
+  height: 100%;
+}
+
+.confirm-delete {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 4px;
+  position: fixed;
+  width: 319px;
+  height: 131px;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.confirm-delete > h3 {
+  color: #000;
+  white-space: nowrap;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  width: 291px;
+  text-align: center;
+}
+
+.confirm-delete-buttons {
+  font-family: inherit;
+  font-weight: 600;
+  width: 291px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-delete-buttons > * {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  border-radius: 4px;
+  border: 0;
+}
+
+.confirm-delete-buttons > button[name='cancel'] {
+  background: #b6b6b6;
+  color: #292929;
+}
+
+.confirm-delete-buttons > button[name='confirm'] {
+  background-color: #dc2626;
+  color: #fff;
+}
+
 #entries-link:hover,
 #entry-form-link:hover,
 button:hover,
