@@ -127,6 +127,7 @@ function entriesClicked(event) {
 
 function entryFormLinkClicked(event) {
   $form.reset();
+  $img.src = '';
   $deleteEntry.classList.add('hidden');
   data.editing = null;
   $entryFormTitle.textContent = 'New Entry';
