@@ -98,8 +98,6 @@ $form.addEventListener('submit', function (event) {
     data.editing = null;
   }
   $form.reset();
-  console.log('value');
-  // $notes.value = '';
   viewSnap('entries');
   if (noEntries) toggleNoEntries();
 });
@@ -113,21 +111,16 @@ function entriesClicked(event) {
 }
 
 function entryFormLinkClicked(event) {
-  console.log('entryForm Clicked');
-
-  // $form.reset();
-  // $notes.value = '';
-  // data.editing = null;
-  // $entryFormTitle.textContent = 'New Entry';
-
+  $form.reset();
+  data.editing = null;
+  $entryFormTitle.textContent = 'New Entry';
   viewSnap('entry-form');
 }
 
 function setEntryFormEdit(entry) {
-  console.log('setEntryFormEdit Clicked');
   $title.value = entry.title;
   $photoUrl.value = entry.img;
-  $notes.textContent = entry.notes;
+  $notes.value = entry.notes;
   $img.src = entry.img;
   $entryFormTitle.textContent = 'Edit Entry';
   data.editing = entry;
@@ -139,11 +132,8 @@ function entriesUnorderedListClicked(event) {
   if ($target.matches('.fa-pencil')) {
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
-
     const entry = data.entries[id];
-    console.log(entry);
     setEntryFormEdit(entry);
-
     viewSnap('entry-form');
   }
 }
