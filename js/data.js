@@ -35,6 +35,21 @@ let data = {
   nextEntryId: 1,
 };
 
+function getEntryFromId(id) {
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i] && data.entries[i].entryId === Number(id))
+      return data.entries[i];
+  }
+}
+
+function getIndexFromId(id) {
+  for (let i = 0; i < data.entries.length; i++) {
+    console.log(i);
+    console.log(data.entries[i]);
+    if (data.entries[i] && data.entries[i].entryId === Number(id)) return i;
+  }
+}
+
 function renderEntry(entry) {
   console.log(entry);
   const $entry = $templateEntry.cloneNode(true);
@@ -78,14 +93,13 @@ $form.addEventListener('submit', function (event) {
   };
   if (data.editing === null) {
     // create a new entry
-    data.entries[data.nextEntryId] = newObj;
+    data.entries.push(newObj);
     $img.src = tempIMG;
 
     const $entry = renderEntry(newObj);
     $entriesUnorderedList.prepend($entry);
     data.nextEntryId++;
   } else {
-    $deleteEntry.classList.add('hidden');
     newObj.entryId = data.editing.entryId;
     data.entries[newObj.entryId] = newObj;
     const $replacementElement = renderEntry(newObj);
@@ -100,6 +114,7 @@ $form.addEventListener('submit', function (event) {
   $form.reset();
   viewSnap('entries');
   if (noEntries) toggleNoEntries();
+  $deleteEntry.classList.add('hidden');
 });
 
 $form.addEventListener('button', function (event) {
@@ -112,12 +127,14 @@ function entriesClicked(event) {
 
 function entryFormLinkClicked(event) {
   $form.reset();
+  $deleteEntry.classList.add('hidden');
   data.editing = null;
   $entryFormTitle.textContent = 'New Entry';
   viewSnap('entry-form');
 }
 
 function setEntryFormEdit(entry) {
+  console.log(entry);
   $title.value = entry.title;
   $photoUrl.value = entry.img;
   $notes.value = entry.notes;
@@ -132,7 +149,10 @@ function entriesUnorderedListClicked(event) {
   if ($target.matches('.fa-pencil')) {
     const $li = $target.closest('li');
     const id = $li.getAttribute('data-entry-id');
-    const entry = data.entries[id];
+    console.log(id);
+    console.log(typeof id);
+    const entry = getEntryFromId(id);
+    console.log(entry);
     setEntryFormEdit(entry);
     viewSnap('entry-form');
   }
@@ -140,13 +160,26 @@ function entriesUnorderedListClicked(event) {
 
 function deleteEntryClicked(event) {
   $modalMain.classList.remove('hidden');
+  console.log(data.editing);
 }
 function modalMainClicked(event) {
   const $target = event.target;
   if ($target.getAttribute('name') === 'confirm') {
     // go ahead and delete
-    delete data.entries[data.editing.entryId];
+    $entriesUnorderedList
+      .querySelector('li[data-entry-id="' + data.editing.entryId + '"]')
+      .remove();
+    console.log('trying to find: ', data.editing.entryId);
+    const index = getIndexFromId(data.editing.entryId);
+    if (index === 0) data.entries.splice(0, 1);
+    else data.entries.splice(index, 1);
     $modalMain.classList.add('hidden');
+    data.editing = null;
+    console.log(data.entries);
+    if (data.entries.length === 0) {
+      if (!noEntries) toggleNoEntries();
+    }
+    viewSnap('entries');
   } else if ($target.getAttribute('name') === 'cancel')
     // close menu if clicked outside or cancel
     $modalMain.classList.add('hidden');
@@ -159,17 +192,18 @@ for (const key in views$) {
   views$[key].classList.add('hidden');
 }
 document.addEventListener('DOMContentLoaded', function (event) {
-  for (let i = 1; i < data.entries.length; i++) {
-    const $entry = renderEntry(data.entries[i]);
-    $entriesUnorderedList.prepend($entry);
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i]) {
+      const $entry = renderEntry(data.entries[i]);
+      $entriesUnorderedList.prepend($entry);
+    }
   }
   if (data.entries.length > 0) toggleNoEntries();
   if (data.editing !== null) setEntryFormEdit(data.editing);
   viewSnap(data.view);
+  $entriesLink.addEventListener('click', entriesClicked);
+  $entryFormLink.addEventListener('click', entryFormLinkClicked);
+  $entriesUnorderedList.addEventListener('click', entriesUnorderedListClicked);
+  $deleteEntry.addEventListener('click', deleteEntryClicked);
+  $modalMain.addEventListener('click', modalMainClicked);
 });
-
-$entriesLink.addEventListener('click', entriesClicked);
-$entryFormLink.addEventListener('click', entryFormLinkClicked);
-$entriesUnorderedList.addEventListener('click', entriesUnorderedListClicked);
-$deleteEntry.addEventListener('click', deleteEntryClicked);
-$modalMain.addEventListener('click', modalMainClicked);

@@ -71,6 +71,7 @@ label {
   line-height: normal;
   text-decoration-line: underline;
   border: 0;
+  padding: 0;
 }
 
 #entry-form-save-delete-column {
